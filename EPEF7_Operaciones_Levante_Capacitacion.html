@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Capacitación EPEF N°7 – Operaciones de Levante | Mantoverde</title>
+<style>
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:'Segoe UI',Arial,sans-serif;background:#f0ede8;color:#1c1c1c}
+  header{background:#CC4E10;color:#fff;padding:1rem 2rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+  header h1{font-size:1.05rem;font-weight:600;letter-spacing:.5px}
+  header span{font-size:.8rem;opacity:.85}
+  .hero{background:#1c1c1c;color:#fff;padding:3rem 2rem 2.5rem;text-align:center}
+  .hero .badge{display:inline-block;background:rgba(204,78,16,.25);border:1px solid #CC4E10;color:#ffb38a;font-size:.75rem;letter-spacing:2px;padding:4px 14px;border-radius:20px;margin-bottom:1rem}
+  .hero h2{font-size:2.6rem;font-weight:700;line-height:1.15}
+  .hero h2 span{color:#CC4E10}
+  .hero p{margin-top:.75rem;color:#aaa;font-size:1rem}
+  .hero-meta{margin-top:1.5rem;display:flex;justify-content:center;gap:2rem;flex-wrap:wrap}
+  .hero-meta .num{font-size:2rem;font-weight:700;color:#CC4E10}
+  .hero-meta .lbl{font-size:.75rem;color:#888;margin-top:2px}
+  nav.tabs{background:#fff;border-bottom:2px solid #e8e4de;display:flex;overflow-x:auto;position:sticky;top:57px;z-index:99}
+  nav.tabs button{flex-shrink:0;background:none;border:none;padding:.85rem 1.4rem;font-size:.88rem;cursor:pointer;color:#6b6b6b;font-weight:500;border-bottom:3px solid transparent;transition:all .15s;white-space:nowrap}
+  nav.tabs button.active{color:#CC4E10;border-bottom-color:#CC4E10}
+  nav.tabs button:hover:not(.active){color:#1c1c1c;background:#faf8f5}
+  .section{display:none;max-width:960px;margin:2rem auto;padding:0 1.5rem 4rem}
+  .section.show{display:block}
+  .card{background:#fff;border-radius:12px;border:1px solid #e8e4de;margin-bottom:1.25rem;overflow:hidden}
+  .card-header{background:#1c1c1c;color:#fff;padding:.75rem 1.25rem;font-size:.95rem;font-weight:600;display:flex;align-items:center;gap:.75rem}
+  .card-header .dot{width:10px;height:10px;border-radius:50%;background:#CC4E10;flex-shrink:0}
+  .card-body{padding:1.25rem}
+  .card-body p,.card-body li{font-size:.92rem;line-height:1.65;color:#333}
+  .card-body ul{padding-left:1.3rem}
+  .card-body li{margin-bottom:.35rem}
+  .grid-2{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1rem;margin-bottom:1.25rem}
+  .grid-3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-bottom:1.25rem}
+  .info-box{background:#fff;border:1px solid #e8e4de;border-radius:12px;overflow:hidden}
+  .info-box .ib-top{background:#CC4E10;height:5px}
+  .info-box .ib-body{padding:1.1rem}
+  .info-box .ib-icon{width:40px;height:40px;border-radius:10px;background:#faece7;display:flex;align-items:center;justify-content:center;font-size:18px;margin-bottom:.75rem}
+  .info-box h4{font-size:.92rem;font-weight:600;color:#1c1c1c;margin-bottom:.5rem}
+  .info-box p{font-size:.85rem;color:#6b6b6b;line-height:1.55}
+  .rule-row{display:flex;align-items:stretch;margin-bottom:.5rem;border-radius:8px;overflow:hidden;border:1px solid #e8e4de}
+  .rule-row .rr-label{background:#CC4E10;color:#fff;font-size:.82rem;font-weight:600;padding:.65rem .9rem;min-width:170px;display:flex;align-items:center}
+  .rule-row .rr-val{background:#fff;padding:.65rem .9rem;font-size:.85rem;color:#333;display:flex;align-items:center;flex:1;flex-wrap:wrap;gap:4px}
+  .alert{background:#fff3ed;border-left:4px solid #CC4E10;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:1rem;font-size:.9rem;color:#7a2800}
+  .danger{background:#fcebeb;border-left:4px solid #c0392b;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:.75rem;font-size:.88rem;color:#7b1f1f}
+  .ok-box{background:#eaf3de;border-left:4px solid #1e7b34;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:.75rem;font-size:.88rem;color:#1e4a24}
+  .info-bar{background:#e6f1fb;border-left:4px solid #185fa5;border-radius:0 8px 8px 0;padding:.9rem 1.1rem;margin-bottom:.75rem;font-size:.88rem;color:#0c447c}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.25rem;margin-bottom:1.25rem}
+  @media(max-width:640px){.two-col{grid-template-columns:1fr}}
+  .tag{display:inline-block;font-size:.75rem;padding:2px 10px;border-radius:20px;margin:2px}
+  .tag.red{background:#fcebeb;color:#a32d2d}
+  .tag.green{background:#eaf3de;color:#1e7b34}
+  .tag.blue{background:#e6f1fb;color:#185fa5}
+  .tag.amber{background:#faeeda;color:#854f0b}
+  /* Tipo levante */
+  .lev-item{display:flex;align-items:center;gap:12px;margin-bottom:6px;border-radius:8px;padding:.6rem 1rem;font-size:.88rem;font-weight:600}
+  .lev-num{width:28px;height:28px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0;color:#fff}
+  /* Semáforo colores */
+  .color-badge{display:inline-block;width:14px;height:14px;border-radius:3px;vertical-align:middle;margin-right:4px}
+  /* QUIZ */
+  .q-num{font-size:.8rem;color:#aaa;margin-bottom:.35rem}
+  .q-text{font-size:1rem;font-weight:600;color:#1c1c1c;margin-bottom:1rem}
+  .opt{background:#f5f3ef;border:1px solid #e8e4de;border-radius:8px;padding:.75rem 1rem;margin-bottom:.6rem;cursor:pointer;font-size:.9rem;color:#1c1c1c;transition:all .12s}
+  .opt:hover{background:#faece7;border-color:#CC4E10}
+  .opt.correct{background:#eaf3de;border-color:#1e7b34;color:#1e4a24}
+  .opt.wrong{background:#fcebeb;border-color:#c0392b;color:#7b1f1f}
+  .feedback{font-size:.85rem;margin-top:.75rem;padding:.75rem 1rem;border-radius:8px;display:none}
+  .feedback.ok-f{background:#eaf3de;color:#1e4a24}
+  .feedback.err-f{background:#fcebeb;color:#7b1f1f}
+  .progress-wrap{background:#e8e4de;border-radius:4px;height:5px;margin-bottom:1.25rem;overflow:hidden}
+  .progress-fill{height:100%;background:#CC4E10;transition:width .3s;border-radius:4px}
+  #next-btn{display:none;background:#CC4E10;color:#fff;border:none;border-radius:8px;padding:.6rem 1.4rem;font-size:.9rem;cursor:pointer;margin-top:.75rem}
+  .score-wrap{text-align:center;padding:2rem}
+  .score-wrap .score-icon{font-size:3rem;margin-bottom:.75rem}
+  .score-wrap h3{font-size:1.5rem;font-weight:700}
+  .score-wrap p{margin-top:.5rem}
+  #restart-btn{background:#CC4E10;color:#fff;border:none;border-radius:8px;padding:.65rem 1.6rem;font-size:.9rem;cursor:pointer;margin-top:.75rem}
+  .name-form{margin-bottom:1.5rem}
+  .name-form label{display:block;font-size:.85rem;color:#6b6b6b;margin-bottom:.4rem;font-weight:500}
+  .name-form input{width:100%;max-width:400px;padding:.65rem 1rem;border:1.5px solid #e8e4de;border-radius:8px;font-size:.95rem;font-family:'Segoe UI',Arial,sans-serif;outline:none;transition:border .15s}
+  .name-form input:focus{border-color:#CC4E10}
+  #cert-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:999;align-items:center;justify-content:center;padding:1rem}
+  #cert-overlay.show{display:flex}
+  #cert-box{background:#fff;border-radius:16px;max-width:680px;width:100%;overflow:hidden;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+  .cert-top{background:#1c1c1c;padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between}
+  .cert-top span{color:#CC4E10;font-weight:700;letter-spacing:1.5px;font-size:.8rem}
+  .cert-top button{background:none;border:none;color:#aaa;font-size:1.4rem;cursor:pointer}
+  .cert-body{padding:2rem 2.5rem;text-align:center}
+  .cert-seal{width:80px;height:80px;border-radius:50%;background:#1c1c1c;border:4px solid #CC4E10;display:flex;align-items:center;justify-content:center;font-size:2rem;margin:0 auto 1.25rem}
+  .cert-name{font-size:1.5rem;color:#CC4E10;font-weight:700;border-bottom:2px solid #CC4E10;display:inline-block;padding-bottom:4px;margin:1rem 0 .5rem}
+  .cert-meta{display:flex;justify-content:center;gap:2.5rem;flex-wrap:wrap;margin-bottom:1.5rem}
+  .cert-meta .cm-val{font-size:1.1rem;font-weight:700;color:#1c1c1c}
+  .cert-meta .cm-lbl{font-size:.75rem;color:#999;margin-top:2px}
+  .cert-divider{border:none;border-top:1px dashed #e8e4de;margin:1.25rem 0}
+  .cert-actions{display:flex;gap:.75rem;justify-content:center;flex-wrap:wrap}
+  .cert-actions button{padding:.6rem 1.4rem;border-radius:8px;font-size:.88rem;cursor:pointer;font-family:'Segoe UI',Arial,sans-serif}
+  .btn-print{background:#CC4E10;color:#fff;border:none}
+  .btn-close{background:#fff;color:#1c1c1c;border:1.5px solid #e8e4de}
+  @media print{
+    body>*:not(#cert-overlay){display:none!important}
+    #cert-overlay{display:flex!important;position:static;background:none;padding:0}
+    #cert-box{box-shadow:none;border-radius:0;max-width:100%}
+    .cert-top button,.cert-actions{display:none!important}
+    .cert-top{background:#1c1c1c!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+    .cert-seal{background:#1c1c1c!important;border-color:#CC4E10!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  }
+  footer{background:#1c1c1c;color:#888;text-align:center;padding:1.5rem;font-size:.8rem}
+  footer strong{color:#CC4E10}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>⛏ Capstone Copper · Mantoverde — EPEF N°7 Operaciones de Levante</h1>
+  <span>CC.MV.GSSO.E007 · v0 · 01/12/2023</span>
+</header>
+
+<div class="hero">
+  <div class="badge">ESTÁNDAR PARA LA ELIMINACIÓN DE FATALIDADES</div>
+  <h2>Operaciones <span>de Levante</span></h2>
+  <p>Capacitación simplificada para todo el personal y contratistas de Mantoverde</p>
+  <div class="hero-meta">
+    <div><div class="num">85%</div><div class="lbl">capacidad máx. SWL permitida</div></div>
+    <div><div class="num">70%</div><div class="lbl">umbral que define levante crítico</div></div>
+    <div><div class="num">4</div><div class="lbl">colores de código de inspección</div></div>
+    <div><div class="num">100%</div><div class="lbl">requerido para aprobar esta evaluación</div></div>
+  </div>
+</div>
+
+<nav class="tabs">
+  <button class="active" onclick="show('intro')">📋 Introducción</button>
+  <button onclick="show('equipos')">🏗 Equipos e Izaje</button>
+  <button onclick="show('procedimientos')">📐 Procedimientos</button>
+  <button onclick="show('personal')">👷 Personal</button>
+  <button onclick="show('quiz')">✅ Evaluación</button>
+</nav>
+
+<!-- ============================================================ INTRO -->
+<div id="s-intro" class="section show">
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>¿Qué es el EPEF N°7?</div>
+    <div class="card-body">
+      <p>Este estándar aplica a <strong>toda operación que emplee un equipo de levante y elementos de izaje</strong> en Mantoverde. Incluye grúas móviles, grúas de torre, puentes-grúa, grúas de pedestal, grúas monorriel, winches, gatas y alzahombres, así como todos los accesorios de izaje asociados.</p>
+      <br>
+      <p>Su implementación es <strong>obligatoria</strong> para empresas propias y contratistas. La palabra "debe" en el texto del estándar indica requisito de cumplimiento obligatorio.</p>
+    </div>
+  </div>
+
+  <div class="grid-3">
+    <div class="info-box">
+      <div class="ib-top"></div>
+      <div class="ib-body">
+        <div class="ib-icon">🏗</div>
+        <h4>Equipos de Levante</h4>
+        <p>Maquinaria para subir/bajar o suspender carga: grúas sobre ruedas, sobre orugas, horquilla, pluma, puente, monorriel y polipastos.</p>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="ib-top"></div>
+      <div class="ib-body">
+        <div class="ib-icon">🔗</div>
+        <h4>Elementos de Izaje</h4>
+        <p>Todo dispositivo que conecta la carga al equipo: eslingas, cadenas, estrobos, grilletes, cáncamos, ganchos, vigas de levante.</p>
+      </div>
+    </div>
+    <div class="info-box">
+      <div class="ib-top"></div>
+      <div class="ib-body">
+        <div class="ib-icon">👷</div>
+        <h4>Rigger</h4>
+        <p>Persona competente para elaborar el plan de izaje, guiar al operador, estrobar la carga e inspeccionar los elementos de izaje.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Tipos de levante</div>
+    <div class="card-body">
+      <div class="lev-item" style="background:#eaf3de">
+        <div class="lev-num" style="background:#1e7b34">NC</div>
+        <div>
+          <div>Levante No Crítico</div>
+          <div style="font-size:.78rem;font-weight:400;color:#555">Levante directo, sin complicaciones. Capacidad del equipo ≤ 70% SWL. 1 grúa. Sin peligros especiales.</div>
+        </div>
+      </div>
+      <div class="lev-item" style="background:#fcebeb">
+        <div class="lev-num" style="background:#c0392b">C</div>
+        <div>
+          <div>Levante Crítico</div>
+          <div style="font-size:.78rem;font-weight:400;color:#555">Requiere decisiones de personal competente. Capacidad &gt; 70% SWL, 2 o más grúas, levante de personas, material peligroso, proximidad a líneas eléctricas u otros factores de riesgo.</div>
+        </div>
+      </div>
+      <div class="alert" style="margin-top:.75rem;margin-bottom:0">
+        <strong>⚠ Regla clave:</strong> En Mantoverde nunca se puede superar el <strong>85% de la capacidad SWL</strong> del equipo, independientemente del tipo de levante.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Código de colores para elementos de izaje</div>
+    <div class="card-body">
+      <p style="margin-bottom:.85rem">Todo elemento sujeto a desgaste debe marcarse con el color del trimestre de inspección. Esto permite verificar visualmente que fue inspeccionado en el período vigente.</p>
+      <div class="rule-row"><div class="rr-label">🟡 1° Trimestre</div><div class="rr-val">Amarillo — Enero, Febrero, Marzo</div></div>
+      <div class="rule-row"><div class="rr-label">🟢 2° Trimestre</div><div class="rr-val">Verde — Abril, Mayo, Junio</div></div>
+      <div class="rule-row"><div class="rr-label">🔴 3° Trimestre</div><div class="rr-val">Rojo — Julio, Agosto, Septiembre</div></div>
+      <div class="rule-row"><div class="rr-label">🔵 4° Trimestre</div><div class="rr-val">Azul — Octubre, Noviembre, Diciembre</div></div>
+      <div class="info-bar" style="margin-top:.75rem;margin-bottom:0">
+        El código de colores <strong>NO autoriza</strong> al personal no calificado a usar los elementos. Solo certifica que fueron inspeccionados y declarados aptos.
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ EQUIPOS -->
+<div id="s-equipos" class="section">
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Requisitos generales de equipos de levante</div>
+    <div class="card-body">
+      <p style="margin-bottom:.9rem">Toda grúa o equipo de levante que ingrese a Mantoverde debe ser revisado y aprobado por la <strong>Gerencia de S&amp;SO</strong>, la que emitirá un documento de Inspección cargado en la plataforma Workmate.</p>
+      <div class="grid-2">
+        <div>
+          <div class="danger">🚫 <strong>Prohibido</strong> deshabilitar sistemas de advertencia o seguridad de la grúa.</div>
+          <div class="danger">🚫 <strong>Prohibido</strong> cargar lateralmente (en forma oblicua) los brazos de levante.</div>
+          <div class="danger">🚫 <strong>Prohibido</strong> realizar levante de carga sin despliegue total y bloqueo de estabilizadores hidráulicos.</div>
+        </div>
+        <div>
+          <div class="ok-box">✅ Ganchos deben tener seguro (lengüeta) en buen estado.</div>
+          <div class="ok-box">✅ Capacidad SWL/WLL claramente marcada en todos los equipos y elementos.</div>
+          <div class="ok-box">✅ Cabinas selladas, con A/C y calefacción operativos. Ventanas cerradas durante la operación.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Dispositivos de seguridad obligatorios por tipo de grúa</div>
+    <div class="card-body">
+      <div class="rule-row"><div class="rr-label" style="min-width:200px">Grúa Móvil</div><div class="rr-val"><span class="tag green">Indicador momento carga</span><span class="tag green">Celda de carga</span><span class="tag green">Luces capacidad</span><span class="tag green">Anti-two-block</span></div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:200px">Grúa Pluma</div><div class="rr-val"><span class="tag green">Indicador momento</span><span class="tag green">Celda de carga</span><span class="tag green">Luces capacidad</span><span class="tag green">Anti-two-block</span><span class="tag green">Control Remoto</span></div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:200px">Grúa de Torre / Pedestal</div><div class="rr-val"><span class="tag green">Indicador momento</span><span class="tag green">Celda de carga</span><span class="tag green">Anti-two-block</span><span class="tag amber">Luces: según E.R.</span></div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:200px">Puente Grúa</div><div class="rr-val"><span class="tag green">Anti-two-block</span><span class="tag amber">Celda: según E.R.</span><span class="tag amber">Luces: según E.R.</span><span class="tag blue">N.A.: indicador momento</span></div></div>
+      <p style="margin-top:.75rem;font-size:.8rem;color:#888"><em>E.R. = requiere Evaluación de Riesgo · N.A. = No Aplica</em></p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Anti-Two-Block (A2B)</div>
+    <div class="card-body">
+      <p>Dispositivo de seguridad que evita que el gancho golpee la pluma durante el izaje. Está formado por dos bloques sólidos que detienen el tambor si el gancho se acerca demasiado al cabezal. En grúas móviles también puede cortar la energía hidráulica si la pluma alcanza niveles extremos de retracción o extensión.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Normas y marcas autorizadas para elementos de izaje</div>
+    <div class="card-body">
+      <div class="rule-row"><div class="rr-label" style="min-width:180px">Eslingas sintéticas planas</div><div class="rr-val">DIN EN 1492-1 · Marcas: Dolezych, Pewag</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:180px">Eslingas circulares</div><div class="rr-val">DIN EN 1492-2 · Marcas: Dolezych, Pewag</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:180px">Cadenas / Pulpos</div><div class="rr-val">DIN EN 818 / DIN EN 1677 · Marcas: Dolezych, Pewag, Crosby</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:180px">Estrobos de acero</div><div class="rr-val">DIN EN 13414 / ASME B30.9 · Marcas: Dolezych, Pewag</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:180px">Grilletes</div><div class="rr-val">EN 13889 / DIN 82101 · Marcas: Dolezych, Pewag, Crosby</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:180px">Cáncamos</div><div class="rr-val">DIN 580 · Marcas: Dolezych, Pewag, Crosby</div></div>
+      <div class="info-bar" style="margin-top:.75rem;margin-bottom:0">Otras marcas pueden autorizarse si presentan certificaciones que acrediten las normas. La autorización final la da la Gerencia de S&amp;SO.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Grúa Pluma — Seguridad específica</div>
+    <div class="card-body">
+      <div class="danger">🚫 La grúa pluma debe operarse <strong>exclusivamente con Control Remoto</strong> a distancia.</div>
+      <div class="ok-box">✅ Si se opera con mando manual, debe existir una <strong>jaula virtual</strong> que impida a la pluma girar sobre el área de la cabina del camión.</div>
+      <p style="margin-top:.5rem;font-size:.88rem;color:#555">El área de la cabina del camión es zona restringida. La pluma debe tener restricciones de movimiento efectivas para evitar pasar por sobre ella.</p>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Mantenimiento de equipos de levante</div>
+    <div class="card-body">
+      <p style="margin-bottom:.7rem">Los equipos deben contar con un programa de mantenimiento auditable. Los contenidos mínimos según Art. 51 DS 132 son:</p>
+      <ul>
+        <li>Estado de sistemas de transmisión, suspensión, rodado, frenado, dirección y seguridad.</li>
+        <li>Sistemas hidráulicos de operación.</li>
+        <li>Sistemas eléctricos.</li>
+        <li>Luces, bocinas, alarmas y protecciones del operador.</li>
+        <li>Sistemas de protección contra incendios.</li>
+        <li>Control de emisión de gases.</li>
+        <li>Todo otro sistema cuya falla pudiera ocasionar lesiones a personas, equipos o procesos.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ PROCEDIMIENTOS -->
+<div id="s-procedimientos" class="section">
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Plan de Izaje — ¿Cuándo y quién?</div>
+    <div class="card-body">
+      <div class="rule-row"><div class="rr-label">¿Cuándo?</div><div class="rr-val">Siempre, en toda maniobra de izaje.</div></div>
+      <div class="rule-row"><div class="rr-label">¿Quién lo hace?</div><div class="rr-val">El Rigger en conjunto con el Operador de la Grúa.</div></div>
+      <div class="rule-row"><div class="rr-label">Levante No Crítico</div><div class="rr-val">Lo autoriza el Supervisor competente a cargo de la maniobra.</div></div>
+      <div class="rule-row"><div class="rr-label">Levante Crítico</div><div class="rr-val">Lo autoriza un Supervisor de Mantoverde competente. Requiere Plan de Izaje completo.</div></div>
+      <div class="rule-row"><div class="rr-label">Viento máximo</div><div class="rr-val">Lo que indique la tabla de cargas del equipo. Ráfagas variables pueden suspender el trabajo aunque no se supere ese límite.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Contenido mínimo del Plan de Izaje Crítico</div>
+    <div class="card-body">
+      <ul>
+        <li>Croquis o foto aérea de instalaciones, estructuras circundantes y radio de levante.</li>
+        <li>Localización de todos los equipos de levante con trayectoria de la carga.</li>
+        <li>Análisis de riesgo de obstáculos, ambiente y la maniobra misma.</li>
+        <li>Dibujos de los elementos a levantar: peso total, centro de gravedad.</li>
+        <li>Dibujos de configuración de grúa, eslingas y fuerzas calculadas.</li>
+        <li>Lista completa de equipos y elementos de izaje con números de serie, SWL y certificados vigentes.</li>
+        <li>Lista de operadores y participantes.</li>
+      </ul>
+      <div class="alert" style="margin-top:.75rem;margin-bottom:0">Todas las partes involucradas (Supervisor, Contratista, Rigger, Ingeniero) deben <strong>firmar</strong> el Análisis de Riesgo y el Plan de Izaje.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Prohibiciones clave durante el levante</div>
+    <div class="card-body">
+      <div class="danger">🚫 <strong>Prohibido</strong> guiar la carga con las manos. Usar cuerdas viento a distancia segura.</div>
+      <div class="danger">🚫 <strong>Prohibido</strong> trabajar bajo carga suspendida o dentro del área de caída (línea de fuego).</div>
+      <div class="danger">🚫 <strong>Prohibido</strong> levantar personas con grúas en canastillo colgante no certificado de fábrica.</div>
+      <div class="danger">🚫 <strong>Prohibido</strong> levantar sobre neumáticos sin desplegar los estabilizadores.</div>
+      <div class="danger">🚫 <strong>Prohibido</strong> cerrar el área de trabajo con cintas de peligro (usar pretiles, barreras o conos con cadenas).</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Distancias mínimas a líneas eléctricas</div>
+    <div class="card-body">
+      <p style="margin-bottom:.8rem">Cuando se trabaje cerca de conductores eléctricos energizados, un observador competente debe estar en todo momento visible para el operador.</p>
+      <div class="rule-row"><div class="rr-label">100.000 V</div><div class="rr-val">3,0 metros</div></div>
+      <div class="rule-row"><div class="rr-label">200.000 V</div><div class="rr-val">4,0 metros</div></div>
+      <div class="rule-row"><div class="rr-label">300.000 V</div><div class="rr-val">4,7 metros</div></div>
+      <div class="rule-row"><div class="rr-label">400.000 V</div><div class="rr-val">5,5 metros</div></div>
+      <div class="rule-row"><div class="rr-label">800.000 V</div><div class="rr-val">8,5 metros</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Estabilizadores y terreno</div>
+    <div class="card-body">
+      <div class="ok-box">✅ Desplegar completamente los estabilizadores hidráulicos antes de todo levante.</div>
+      <div class="ok-box">✅ Usar almohadillas de madera o plástico especial bajo los platos estabilizadores para aumentar área de compresión.</div>
+      <div class="ok-box">✅ Para izajes críticos, verificar resistencia del terreno mediante análisis de especialista.</div>
+      <div class="alert" style="margin-bottom:0">Solo en casos muy especiales y acotados se puede levantar con estabilizadores no completamente desplegados, con análisis de riesgo validado por Supervisión y registrado en el Permiso de Trabajo.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Inspección y registros de elementos de izaje</div>
+    <div class="card-body">
+      <p style="margin-bottom:.75rem">Todo equipo de levante y elemento de izaje debe revisarse <strong>antes y después de cada uso</strong>. El Operador y el Rigger registran el estado en las listas de verificación adjuntas al AST de la actividad.</p>
+      <p>El responsable del área debe mantener un registro que incluya: N° de identificación, historial de inspecciones, certificaciones, mantenimiento, modificaciones y pruebas.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ PERSONAL -->
+<div id="s-personal" class="section">
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Requisitos para operar equipos de levante</div>
+    <div class="card-body">
+      <div class="rule-row"><div class="rr-label">Licencia Interna</div><div class="rr-val">Obligatoria para todo operador de grúa y Rigger. Requisitos en documento CC.MV.GSSO.I014.</div></div>
+      <div class="rule-row"><div class="rr-label">Curso Monitor B</div><div class="rr-val">Obligatorio. Dictado por proveedor Dolezych. Condicionante para realizar izaje de cargas.</div></div>
+      <div class="rule-row"><div class="rr-label">Curso Elementos de Izaje</div><div class="rr-val">Obligatorio para operadores de grúa, Rigger y camión pluma.</div></div>
+      <div class="rule-row"><div class="rr-label">Sicosensotécnico</div><div class="rr-val">Requerido según tipo de equipo (ver Tabla 4 del estándar).</div></div>
+      <div class="rule-row"><div class="rr-label">Vencimiento credencial</div><div class="rr-val">Corresponde al vencimiento más próximo de los documentos exigidos.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>El Rigger — Rol y responsabilidades</div>
+    <div class="card-body">
+      <div class="two-col">
+        <div>
+          <p style="font-weight:600;margin-bottom:.5rem">Identificación visual obligatoria:</p>
+          <div class="ok-box">Chaleco tipo geólogo <strong>color amarillo</strong> con la leyenda <strong>RIGGER</strong> en la espalda.</div>
+          <div class="ok-box">Silbato para advertir las maniobras.</div>
+          <div class="ok-box">Anemómetro, calculadora, lápiz indeleble, radio de comunicación.</div>
+        </div>
+        <div>
+          <p style="font-weight:600;margin-bottom:.5rem">Funciones clave:</p>
+          <ul style="padding-left:1.2rem;font-size:.88rem;color:#333;line-height:1.7">
+            <li>Elaborar el Plan de Izaje con el Operador.</li>
+            <li>Inspeccionar y separar elementos de izaje defectuosos.</li>
+            <li>Cerrar el área de trabajo y colocar letreros de advertencia.</li>
+            <li>Coordinar y dirigir a los vienteros.</li>
+            <li>Usar el código de señales manuales (Tabla 6).</li>
+            <li>Custodiar el área y autorizar movimiento de personal.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="info-bar" style="margin-bottom:0">
+        <strong>¿El Operador puede ser Rigger?</strong> Sí, excepto cuando la maniobra requiera el uso de vienteros.
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Vienteros — Reglas fundamentales</div>
+    <div class="card-body">
+      <div class="danger">🚫 <strong>Nunca</strong> ponerse bajo la carga suspendida. Mantener proporción 2:1 (carga a 3m → vientero a 6m).</div>
+      <div class="danger">🚫 <strong>Nunca</strong> enrollar la soga a la mano.</div>
+      <div class="danger">🚫 <strong>Nunca</strong> empujar o sostener la carga con las manos.</div>
+      <div class="ok-box">✅ Seguir fielmente las instrucciones del Rigger.</div>
+      <div class="alert" style="margin-bottom:0">Se deben usar vienteros cuando la carga deba ubicarse en un punto específico o tenga un tamaño/volumen tal que el operador no pueda posicionarla solo.</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Código de señales manuales — Resumen</div>
+    <div class="card-body">
+      <div class="rule-row"><div class="rr-label" style="min-width:220px">⬆ Subir la carga</div><div class="rr-val">Brazo vertical, dedo índice arriba, mover la mano en círculo horizontal.</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:220px">⬇ Bajar la carga</div><div class="rr-val">Antebrazo extendido abajo, dedo índice abajo, mover en círculo.</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:220px">👍 Subir la pluma</div><div class="rr-val">Brazo extendido, dedos cerrados, pulgar hacia arriba.</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:220px">👎 Bajar la pluma</div><div class="rr-val">Brazo extendido, dedos cerrados, pulgar hacia abajo.</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:220px">✋ Pare (Stop)</div><div class="rr-val">Brazo extendido, palma abajo, desplazar el brazo adelante y atrás.</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:220px">🆘 Parada de Emergencia</div><div class="rr-val">Ambos brazos extendidos, palmas abajo, moverlos adelante y atrás. <strong>Cualquier persona puede darla y debe ser obedecida.</strong></div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:220px">🔄 Girar la grúa</div><div class="rr-val">Brazo extendido apuntando con los dedos en la dirección de giro.</div></div>
+      <div class="rule-row"><div class="rr-label" style="min-width:220px">🔒 Bloquear todo</div><div class="rr-val">Tomarse uno de los pulgares con ambas manos al frente.</div></div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Responsabilidades por rol</div>
+    <div class="card-body">
+      <div class="grid-2">
+        <div class="info-box">
+          <div class="ib-top"></div>
+          <div class="ib-body">
+            <h4>Superintendente de proceso</h4>
+            <p>Autoriza trabajadores, asegura equipos operativos y designa al Champion de Operaciones de Levante del área.</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <div class="ib-top"></div>
+          <div class="ib-body">
+            <h4>Champion de Levante</h4>
+            <p>Asesora, inspecciona periódicamente los equipos y mantiene el programa de capacitación teórica y práctica.</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <div class="ib-top"></div>
+          <div class="ib-body">
+            <h4>Supervisor dueño del área</h4>
+            <p>Mantiene equipos según normas, verifica trabajos propios y de terceros, otorga permisos de trabajo.</p>
+          </div>
+        </div>
+        <div class="info-box">
+          <div class="ib-top"></div>
+          <div class="ib-body">
+            <h4>Operador del equipo</h4>
+            <p>Revisa el estado del equipo, participa en el plan de izaje, sigue instrucciones del Rigger y puede detener el levante si ve una condición insegura.</p>
+          </div>
+        </div>
+      </div>
+      <div class="alert" style="margin-bottom:0"><strong>Derecho a detener:</strong> CUALQUIER PERSONA puede detener el levante si cree que no es seguro proceder. Esta autoridad debe quedar clara en la reunión previa a la tarea.</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- ============================================================ QUIZ -->
+<div id="s-quiz" class="section">
+
+  <div class="card">
+    <div class="card-header"><div class="dot"></div>Evaluación EPEF N°7 — Operaciones de Levante</div>
+    <div class="card-body">
+      <div class="name-form">
+        <label for="user-name">Nombre completo del participante</label>
+        <input type="text" id="user-name" placeholder="Ej: Juan Pérez González">
+      </div>
+      <div class="progress-wrap"><div class="progress-fill" id="prog" style="width:0%"></div></div>
+      <div id="quiz-wrap"><div id="q-body"></div></div>
+      <div id="score-wrap" style="display:none">
+        <div class="score-icon" id="score-icon"></div>
+        <h3 id="score-title"></h3>
+        <p id="score-sub"></p>
+        <div id="cert-btn-wrap" style="display:none;margin-top:1rem">
+          <button onclick="showCert()" style="background:#CC4E10;color:#fff;border:none;border-radius:8px;padding:.65rem 1.6rem;font-size:.9rem;cursor:pointer">🏆 Ver mi certificado</button>
+        </div>
+        <br>
+        <button id="restart-btn" onclick="restartQuiz()">🔄 Reiniciar evaluación</button>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Certificado -->
+<div id="cert-overlay">
+  <div id="cert-box">
+    <div class="cert-top">
+      <span>CAPSTONE COPPER · MANTOVERDE</span>
+      <button onclick="closeCert()">✕</button>
+    </div>
+    <div class="cert-body">
+      <div class="cert-seal">🏗</div>
+      <p style="font-size:.8rem;letter-spacing:2px;color:#888">CERTIFICADO DE CAPACITACIÓN</p>
+      <div class="cert-name" id="cert-name-display">—</div>
+      <p style="font-size:.9rem;color:#555">aprobó satisfactoriamente la capacitación</p>
+      <p style="font-size:1rem;font-weight:600;color:#1c1c1c;margin-top:.25rem">EPEF N°7 — Operaciones de Levante</p>
+      <hr class="cert-divider">
+      <div class="cert-meta">
+        <div><div class="cm-val" id="cert-score">—</div><div class="cm-lbl">Puntaje obtenido</div></div>
+        <div><div class="cm-val" id="cert-date">—</div><div class="cm-lbl">Fecha</div></div>
+        <div><div class="cm-val">CC.MV.GSSO.E007</div><div class="cm-lbl">Estándar</div></div>
+      </div>
+      <div class="cert-actions">
+        <button class="btn-print" onclick="window.print()">🖨 Imprimir</button>
+        <button class="btn-close" onclick="closeCert()">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <strong>Capstone Copper · Mantoverde</strong> — EPEF N°7 Operaciones de Levante · CC.MV.GSSO.E007 · Versión 0 · Vigente desde 01/12/2023
+</footer>
+
+<script>
+const questions = [
+  {
+    q:"¿Hasta qué porcentaje de la capacidad SWL se pueden realizar maniobras de levante en Mantoverde?",
+    opts:["70%","85%","90%","100%"],
+    c:1,
+    fb:"Correcto. En Mantoverde no se debe exceder el 85% de la capacidad de Carga Segura de Trabajo (SWL) para realizar maniobras de levante, sin importar el tipo de levante."
+  },
+  {
+    q:"¿A partir de qué porcentaje de la capacidad clasificada de la grúa un levante se considera CRÍTICO?",
+    opts:["50%","70%","85%","100%"],
+    c:1,
+    fb:"Correcto. Un levante se considera Crítico cuando supera el 70% de la capacidad de levante del equipo, entre otros factores. Requiere decisiones de personal competente y un Plan de Izaje aprobado por un Supervisor de Mantoverde."
+  },
+  {
+    q:"¿Quién elabora el Plan de Izaje?",
+    opts:["Solo el Supervisor a cargo","El Rigger en conjunto con el Operador de la Grúa","La Gerencia de S&SO","El contratista propietario de la grúa"],
+    c:1,
+    fb:"Correcto. El Plan de Izaje es elaborado por el Rigger en conjunto con el Operador de la Grúa, para toda maniobra de izaje."
+  },
+  {
+    q:"¿En qué situación el Operador de la grúa puede actuar también como Rigger?",
+    opts:["Nunca, siempre deben ser personas distintas","Cuando la carga pesa menos de 4 toneladas","Cuando la maniobra NO requiere el uso de vienteros","Siempre que tenga licencia de conducir vigente"],
+    c:2,
+    fb:"Correcto. El Operador puede ser a la vez Rigger, excepto cuando la maniobra requiera el uso de vienteros, ya que en ese caso necesita coordinar al equipo mientras controla la carga."
+  },
+  {
+    q:"¿Qué color corresponde al código de inspección del tercer trimestre del año (julio–septiembre)?",
+    opts:["Amarillo","Verde","Rojo","Azul"],
+    c:2,
+    fb:"Correcto. El sistema de códigos de colores es: 1° trimestre Amarillo, 2° trimestre Verde, 3° trimestre Rojo y 4° trimestre Azul. La marca del color en el elemento certifica que fue inspeccionado y declarado apto en ese período."
+  },
+  {
+    q:"¿Qué significa la señal de Parada de Emergencia y quién puede darla?",
+    opts:["Bajar lentamente; solo el Rigger","Detener el movimiento; solo el Operador","Mover ambos brazos extendidos hacia adelante y atrás; cualquier persona presente","Tomarse el pulgar con ambas manos; solo el Supervisor"],
+    c:2,
+    fb:"Correcto. La señal de Parada de Emergencia (ambos brazos extendidos y palmas hacia abajo, desplazados adelante y atrás) es la única señal que puede realizar CUALQUIER persona, aunque no forme parte del equipo de trabajo, y DEBE ser obedecida por el operador."
+  },
+  {
+    q:"¿Qué debe hacer el Rigger para controlar el movimiento de la carga durante el izaje?",
+    opts:["Guiar la carga directamente con las manos","Usar cuerdas (vientos) amarradas a la carga y tensadas desde distancia segura","Indicar al operador que gire lentamente la pluma","Pedir a otro trabajador que empuje la carga hasta la posición deseada"],
+    c:1,
+    fb:"Correcto. Está prohibido guiar la carga con las manos. Se deben usar cuerdas viento amarradas a la carga, tensadas manualmente por los vienteros desde una distancia segura, fuera de la zona de caída."
+  },
+  {
+    q:"¿A qué distancia mínima debe mantenerse la grúa de una línea eléctrica de 200.000 voltios?",
+    opts:["3,0 metros","4,0 metros","5,5 metros","8,5 metros"],
+    c:1,
+    fb:"Correcto. La distancia mínima desde la grúa a una línea de 200.000 V es 4,0 metros. Además, debe haber un observador competente en todo momento visible para el operador cuando se trabaja cerca de líneas eléctricas."
+  },
+  {
+    q:"¿Qué indica el código de colores en un elemento de izaje?",
+    opts:["Que el elemento puede ser usado por cualquier persona","Que el elemento fue fabricado en el trimestre correspondiente","Que el elemento fue inspeccionado y declarado apto en la última inspección","Que el elemento pertenece a un área específica de la faena"],
+    c:2,
+    fb:"Correcto. El código de colores garantiza que los elementos de izaje están registrados y fueron encontrados aptos en la última inspección. No faculta al personal no autorizado a usarlos."
+  },
+  {
+    q:"¿Cuándo se puede levantar personas con una grúa en Mantoverde?",
+    opts:["Siempre que el Rigger lo autorice y exista un análisis de riesgo","Está completamente prohibido en todas las circunstancias","Solo con equipos especialmente diseñados y certificados de fábrica, con plan de emergencia previo","Solo en emergencias autorizadas por el Supervisor"],
+    c:2,
+    fb:"Correcto. El levante de personas con grúas en canastillo colgante NO certificado de fábrica está PROHIBIDO. Sin embargo, se puede levantar personas usando equipos especialmente diseñados y certificados de fábrica, con un Plan de Emergencia establecido y el trabajador entrenado en auto rescate."
+  },
+  {
+    q:"¿Qué identificación visual debe usar el Rigger durante la maniobra?",
+    opts:["Casco rojo y chaleco reflectante estándar","Chaleco tipo geólogo color amarillo con la leyenda RIGGER en la espalda y un silbato","Chaleco naranja con la leyenda SEÑALERO y banderines de colores","Cualquier distinción que lo diferencie de los demás trabajadores"],
+    c:1,
+    fb:"Correcto. El Rigger debe usar chaleco tipo geólogo color amarillo con la leyenda RIGGER en la espalda y un silbato para advertir las maniobras. Además debe contar con anemómetro, calculadora, lápiz indeleble y radio de comunicación."
+  },
+  {
+    q:"¿Qué debe verificarse ANTES de iniciar cualquier levante respecto al terreno y los estabilizadores?",
+    opts:["Solo verificar que los estabilizadores estén desplegados a la mitad","Desplegar completamente los estabilizadores y usar almohadillas bajo los platos si el terreno lo requiere","Es suficiente con que el operador evalúe visualmente el terreno","Solo se requiere análisis de terreno si la carga supera las 20 toneladas"],
+    c:1,
+    fb:"Correcto. Se deben desplegar completamente los estabilizadores hidráulicos y usar almohadillas de madera o plástico especial bajo los platos estabilizadores para aumentar el área de compresión. Para levantes críticos se debe verificar la resistencia del terreno mediante análisis de especialista."
+  },
+];
+
+let cur=0, score=0, answered=false;
+
+function renderQ() {
+  const q = questions[cur];
+  document.getElementById('prog').style.width = (cur/questions.length*100)+'%';
+  let html = `<div class="q-num">Pregunta ${cur+1} de ${questions.length}</div><div class="q-text">${q.q}</div>`;
+  q.opts.forEach((o,i) => html += `<div class="opt" id="opt${i}" onclick="answer(${i})">${o}</div>`);
+  html += `<div class="feedback" id="fb"></div><button id="next-btn" onclick="nextQ()">${cur===questions.length-1?'Ver resultado':'Siguiente →'}</button>`;
+  document.getElementById('q-body').innerHTML = html;
+  answered = false;
+}
+
+function answer(i) {
+  if(answered) return;
+  answered = true;
+  const q = questions[cur];
+  document.querySelectorAll('.opt').forEach((el,idx) => {
+    el.style.cursor='default';
+    if(idx===q.c) el.classList.add('correct');
+    else if(idx===i&&i!==q.c) el.classList.add('wrong');
+  });
+  const fb = document.getElementById('fb');
+  fb.textContent = q.fb;
+  fb.style.display='block';
+  fb.className='feedback '+(i===q.c?'ok-f':'err-f');
+  if(i===q.c) score++;
+  document.getElementById('next-btn').style.display='inline-block';
+}
+
+function nextQ() {
+  cur++;
+  if(cur>=questions.length) showResult();
+  else renderQ();
+}
+
+function showResult() {
+  document.getElementById('prog').style.width='100%';
+  document.getElementById('quiz-wrap').style.display='none';
+  const sw = document.getElementById('score-wrap');
+  sw.style.display='block';
+  const total = questions.length;
+  const approved = score===total;
+  document.getElementById('score-icon').textContent = approved?'🏆':'📖';
+  document.getElementById('score-title').textContent = score+' de '+total+' correctas ('+Math.round(score/total*100)+'%)';
+  if(approved){
+    document.getElementById('score-sub').textContent='¡Perfecto! Respondiste todo correcto. Ya puedes obtener tu certificado.';
+    document.getElementById('score-sub').style.color='#1e7b34';
+    document.getElementById('cert-btn-wrap').style.display='block';
+  } else {
+    const wrong=total-score;
+    document.getElementById('score-sub').textContent='Tuviste '+wrong+' error'+(wrong>1?'es':'')+'. Necesitas 100% para aprobar. Revisa el material e intenta de nuevo.';
+    document.getElementById('score-sub').style.color='#c0392b';
+    document.getElementById('cert-btn-wrap').style.display='none';
+  }
+}
+
+function showCert() {
+  const nombre = document.getElementById('user-name').value.trim()||'Participante';
+  const fecha = new Date().toLocaleDateString('es-CL',{day:'2-digit',month:'long',year:'numeric'});
+  document.getElementById('cert-name-display').textContent = nombre;
+  document.getElementById('cert-score').textContent = questions.length+'/'+questions.length;
+  document.getElementById('cert-date').textContent = fecha;
+  document.getElementById('cert-overlay').classList.add('show');
+  document.body.style.overflow='hidden';
+}
+
+function closeCert() {
+  document.getElementById('cert-overlay').classList.remove('show');
+  document.body.style.overflow='';
+}
+
+function restartQuiz() {
+  cur=0; score=0; answered=false;
+  document.getElementById('quiz-wrap').style.display='block';
+  document.getElementById('score-wrap').style.display='none';
+  renderQ();
+}
+
+function show(id) {
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('show'));
+  document.getElementById('s-'+id).classList.add('show');
+  document.querySelectorAll('nav.tabs button').forEach(b=>b.classList.remove('active'));
+  const idx=['intro','equipos','procedimientos','personal','quiz'].indexOf(id);
+  document.querySelectorAll('nav.tabs button')[idx].classList.add('active');
+  if(id==='quiz'&&cur===0&&!answered) renderQ();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+document.getElementById('cert-overlay').addEventListener('click',function(e){
+  if(e.target===this) closeCert();
+});
+</script>
+</body>
+</html>
